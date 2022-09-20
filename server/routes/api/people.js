@@ -13,6 +13,6 @@ router.post("/", validateMiddleware, ctrl.add);
 
 router.delete("/:peopleId", ctrlWrapper(ctrl.removeById));
 
-router.put("/:contactId", validateMiddleware, ctrl.updateById);
+router.put("/:peopleId", validateMiddleware, ctrl.updateById);
 
 module.exports = router;
