@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState, useEffect } from "react";
+import { getAll } from "./api/api";
 
 function App() {
+  const [peoples, setPeoples] = useState([]);
+
+  useEffect(() => {
+    const getPeoples = async () => {
+      try {
+        const { data } = await getAll();
+        console.log(data);
+        const allPeoples = data.result.map((people) => {
+          return people;
+        });
+        setPeoples(allPeoples);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getPeoples();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {peoples.length > 0 && (
+        <>
+          <ul>
+            {peoples.map((people) => {
+              return (
+                <li key={people._id}>
+                  {people.name} {people.surname}
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      )}
     </div>
   );
 }
