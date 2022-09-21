@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { getAll } from "./api/api";
+import { deletePeople, getAll } from "./api/api";
 import PeopleTable from "./components/PeopleTable";
 import BtnAdd from "./components/BtnAdd/BtnBuy";
 import Modal from "./components/Modal/Modal";
@@ -37,6 +37,11 @@ function App() {
     setNewPeople(true);
   };
 
+  const removePeople = (id) => {
+    deletePeople(id);
+    addNewPeople();
+  };
+
   const modalOpen = (event) => {
     event.preventDefault();
     setOpenModal(true);
@@ -52,7 +57,9 @@ function App() {
   };
   return (
     <div className="App">
-      {peoples.length > 0 && <PeopleTable peoples={peoples} />}
+      {peoples.length > 0 && (
+        <PeopleTable peoples={peoples} removePeople={removePeople} />
+      )}
       <BtnAdd type="button" onClick={(event) => modalOpen(event)} />
       {openModal && (
         <Modal

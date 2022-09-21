@@ -2,6 +2,7 @@ import { useSortableData } from "../hooks/useSortableData";
 
 const PeopleTable = (props) => {
   const { items, requestSort, sortConfig } = useSortableData(props.peoples);
+  const { removePeople } = props;
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
       return;
@@ -41,6 +42,7 @@ const PeopleTable = (props) => {
                 Date
               </button>
             </th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -49,6 +51,12 @@ const PeopleTable = (props) => {
               <td>{item.name}</td>
               <td>{item.surname}</td>
               <td>{item.createdAt}</td>
+              <td>
+                <button type="button" onClick={() => removePeople(item._id)}>
+                  delete
+                </button>
+                <button>edit</button>
+              </td>
             </tr>
           ))}
         </tbody>

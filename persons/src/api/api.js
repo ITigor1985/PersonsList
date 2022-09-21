@@ -17,7 +17,7 @@ export const addPeople = async (item) => {
 
 export const deletePeople = async (id) => {
   try {
-    const response = await axios.delete("/api/people/", id);
+    const response = await axios.delete(`/api/people/${id}`);
     console.log("👉 Returned data:", response.ok);
   } catch (e) {
     console.log(`😱 Axios request failed: ${e}`);
