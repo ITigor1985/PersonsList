@@ -128,7 +128,7 @@ export const BtnSubmit = styled.button`
     position: absolute;
     display: block;
     top: 50%;
-    left: 185px;
+    right: 85px;
     transform: translateY(-50%);
     background-image: url(${arrow});
     background-size: contain;
