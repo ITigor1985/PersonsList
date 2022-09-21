@@ -10,7 +10,6 @@ function App() {
     const getPeoples = async () => {
       try {
         const { data } = await getAll();
-        console.log(data);
         const allPeoples = data.result.map((people) => {
           return people;
         });
