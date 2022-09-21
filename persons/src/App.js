@@ -9,6 +9,9 @@ function App() {
   const [peoples, setPeoples] = useState([]);
   const [newPeople, setNewPeople] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [id, setId] = useState(null);
 
   useEffect(() => {
     const getPeoples = async () => {
@@ -42,8 +45,18 @@ function App() {
     addNewPeople();
   };
 
-  const modalOpen = (event) => {
+  const modalOpen = (event, item) => {
+    console.log(item);
     event.preventDefault();
+    if (item) {
+      setName(item.name);
+      setSurname(item.surname);
+      setId(item._id);
+    } else {
+      setName("");
+      setSurname("");
+      setId(null);
+    }
     setOpenModal(true);
   };
 
@@ -58,7 +71,11 @@ function App() {
   return (
     <div className="App">
       {peoples.length > 0 && (
-        <PeopleTable peoples={peoples} removePeople={removePeople} />
+        <PeopleTable
+          peoples={peoples}
+          removePeople={removePeople}
+          modalOpen={modalOpen}
+        />
       )}
       <BtnAdd type="button" onClick={(event) => modalOpen(event)} />
       {openModal && (
@@ -66,6 +83,9 @@ function App() {
           onClick={modalClose}
           modalCloseBtn={modalCloseBtn}
           addNewPeople={addNewPeople}
+          name={name}
+          surname={surname}
+          id={id}
         />
       )}
     </div>

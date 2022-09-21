@@ -2,7 +2,7 @@ import { useSortableData } from "../hooks/useSortableData";
 
 const PeopleTable = (props) => {
   const { items, requestSort, sortConfig } = useSortableData(props.peoples);
-  const { removePeople } = props;
+  const { removePeople, modalOpen } = props;
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
       return;
@@ -55,7 +55,9 @@ const PeopleTable = (props) => {
                 <button type="button" onClick={() => removePeople(item._id)}>
                   delete
                 </button>
-                <button>edit</button>
+                <button type="button" onClick={(e) => modalOpen(e, item)}>
+                  edit
+                </button>
               </td>
             </tr>
           ))}

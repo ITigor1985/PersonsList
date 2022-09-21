@@ -1,6 +1,6 @@
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { addPeople } from "../../api/api";
+import { addPeople, editPeople } from "../../api/api";
 import { useInpute } from "./customHooks/customHooks";
 import {
   BtnSubmit,
@@ -17,9 +17,9 @@ const positionToast = () => {
   return { position: toast.POSITION.TOP_CENTER };
 };
 
-const Form = ({ addNewPeople }) => {
-  const name = useInpute("", { isEmpty: true, onlyLetter: true });
-  const surname = useInpute("", { isEmpty: true, onlyLetter: true });
+const Form = ({ addNewPeople, editName, editSurname, id }) => {
+  const name = useInpute(editName, { isEmpty: true, onlyLetter: true });
+  const surname = useInpute(editSurname, { isEmpty: true, onlyLetter: true });
 
   const handleSubmit = (nameValidError, surnameValidError, evt) => {
     evt.preventDefault();
@@ -34,10 +34,17 @@ const Form = ({ addNewPeople }) => {
     const form = evt.currentTarget;
     const name = form.elements.name.value;
     const surname = form.elements.surname.value;
-    item = { name, surname };
-    addPeople(item);
-    addNewPeople();
-    toast.success("People add!", positionToast());
+    if (id) {
+      item = { name, surname };
+      editPeople(id, item);
+      addNewPeople();
+      toast.success("People edit!", positionToast());
+    } else {
+      item = { name, surname };
+      addPeople(item);
+      addNewPeople();
+      toast.success("People add!", positionToast());
+    }
   };
 
   return (

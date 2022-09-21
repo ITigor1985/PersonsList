@@ -15,6 +15,8 @@ export const Btn = styled.button`
   text-transform: uppercase;
   color: #4bcfa0;
   cursor: pointer;
+  margin-left: auto;
+  margin-right:auto ;
 
   :hover {
     border: none;

@@ -17,8 +17,15 @@ export const addPeople = async (item) => {
 
 export const deletePeople = async (id) => {
   try {
-    const response = await axios.delete(`/api/people/${id}`);
-    console.log("👉 Returned data:", response.ok);
+    await axios.delete(`/api/people/${id}`);
+  } catch (e) {
+    console.log(`😱 Axios request failed: ${e}`);
+  }
+};
+
+export const editPeople = async (id, item) => {
+  try {
+    await axios.put(`/api/people/${id}`, item);
   } catch (e) {
     console.log(`😱 Axios request failed: ${e}`);
   }
