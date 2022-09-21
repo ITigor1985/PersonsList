@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import { getAll } from "./api/api";
+import PeopleTable from "./components/PeopleTable";
 
 function App() {
   const [peoples, setPeoples] = useState([]);
@@ -23,19 +24,7 @@ function App() {
 
   return (
     <div className="App">
-      {peoples.length > 0 && (
-        <>
-          <ul>
-            {peoples.map((people) => {
-              return (
-                <li key={people._id}>
-                  {people.name} {people.surname}
-                </li>
-              );
-            })}
-          </ul>
-        </>
-      )}
+      {peoples.length > 0 && <PeopleTable peoples={peoples} />}
     </div>
   );
 }
